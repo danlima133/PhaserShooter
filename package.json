@@ -1,0 +1,17 @@
+{
+  "name": "phasershooter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "dependencies": {
+    "phaser": "^3.80.1",
+    "webpack-cli": "^5.1.4",
+    "webpack": "^5.91.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "npx webpack --mode development",
+    "build": "npx webpack --mode producation",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
