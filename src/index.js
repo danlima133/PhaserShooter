@@ -1,5 +1,4 @@
+import { Game } from 'phaser';
 import { config } from './config/config';
 
-const Phaser = require('phaser');
-
-const game = new Phaser.Game(config);
+const game = new Game(config);
