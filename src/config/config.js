@@ -1,11 +1,22 @@
 import { Game } from '../scenes/Game';
 
+import { AUTO } from 'phaser';
+
+const styleCanvas = "border-radius: 10px; border: solid black 3px;"
+
 export const config = {
-    type: 1,
+    type: AUTO,
     width: 256,
     height: 320,
     parent: 'game',
-    scene: [Game]
+    canvasStyle: styleCanvas,
+    scene: [Game],
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: false
+        }
+    }
 };
 
 export function getAsset(path) {

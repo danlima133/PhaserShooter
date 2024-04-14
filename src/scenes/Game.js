@@ -1,3 +1,4 @@
+import { config } from '../config/config';
 import { Scene, Math } from 'phaser';
 
 import { BackgroundObject } from '../objects/BackgroundObject';
@@ -10,7 +11,7 @@ export class Game extends Scene {
         super({ key: 'Game' });
         
         this.background = new BackgroundObject(getBackgroundType(), 30);
-        this.player = new PlayerObject();
+        this.player = new PlayerObject(80, config.width/2, config.height -50);
     };
     preload() {
         this.background.preload(this);
