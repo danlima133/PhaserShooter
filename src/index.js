@@ -10,10 +10,9 @@ var gamePause = false;
 
 document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
-        /*if (!game.scene.isActive(keySceneHasPause)) {
-            console.log('block');
+        if (!game.scene.isActive(keySceneHasPause) && gamePause === false) {
             return;
-        };*/
+        };
         const scene = game.scene.keys[keySceneHasPause];
         gamePause =! gamePause;
         switch (gamePause) {
