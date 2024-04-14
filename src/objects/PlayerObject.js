@@ -56,4 +56,7 @@ export class PlayerObject extends GameInterface {
             this.player.setVelocityY(0);
         };
     };
+    getObjects() {
+        return { 'player': this.player };
+    };
 };

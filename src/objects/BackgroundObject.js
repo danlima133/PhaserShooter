@@ -25,7 +25,10 @@ export class BackgroundObject extends GameInterface {
         this.scroll = Math.abs(parseInt(this.background.y - this.offset)/320);
         if (Number.isInteger(this.scroll)){
             this.background.height += 320;
-            console.log('reapet', this.scroll);
+            //console.log('reapet', this.scroll);
         };
+    };
+    getObjects() {
+        return { 'background': this.background };
     };
 };
