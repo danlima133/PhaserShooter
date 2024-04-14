@@ -1,4 +1,5 @@
 import { Game } from '../scenes/Game';
+import { Main } from '../scenes/Main';
 
 import { AUTO } from 'phaser';
 
@@ -10,7 +11,7 @@ export const config = {
     height: 320,
     parent: 'game',
     canvasStyle: styleCanvas,
-    scene: [Game],
+    scene: [Main, Game],
     physics: {
         default: 'arcade',
         arcade: {
