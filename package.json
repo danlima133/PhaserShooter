@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "dependencies": {
     "phaser": "^3.80.1",
-    "webpack-cli": "^5.1.4",
-    "webpack": "^5.91.0"
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   },
   "devDependencies": {},
   "scripts": {
