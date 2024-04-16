@@ -7,7 +7,7 @@ export class Main extends Scene {
     constructor (){
         super({ key: 'Main' })
 
-        this.background = new BackgroundObject('river', 30);
+        this.background = new BackgroundObject('river', 30, true);
     };
     preload() {
         this.background.preload(this)

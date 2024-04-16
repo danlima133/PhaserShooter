@@ -1,6 +1,8 @@
 import { getAsset } from "../config/config";
 import { GameInterface } from "../interfaces/GameInterface";
 
+import { GameOverPrefab } from '../prefabs/GameOverPrefab'
+
 export class PlayerObject extends GameInterface {
     constructor(velocity, x, y) {
         super();
@@ -10,6 +12,8 @@ export class PlayerObject extends GameInterface {
         this.playerX = x;
         this.playerY = y;
         this.velocity = velocity;
+
+        this.gameOver = false;
         
         this.cursor;
     };

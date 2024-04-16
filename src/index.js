@@ -1,19 +1,23 @@
 import { Game } from 'phaser';
 import { config } from './config/config';
 
-import { PausePrefab } from './prefab/PausePrefab';
+import { PausePrefab } from './prefabs/PausePrefab';
 
 const game = new Game(config);
 
 const keySceneHasPause = 'Game';
+
 var gamePause = false;
 
 document.addEventListener('keydown', event => {
     if (event.key === 'Escape') {
-        if (!game.scene.isActive(keySceneHasPause) && gamePause === false) {
+        if (!game.scene.isActive(keySceneHasPause) && gamePause === false && !gameOver) {
             return;
         };
         const scene = game.scene.keys[keySceneHasPause];
+        if (scene.player.gameOver === true) {
+            return;
+        };
         gamePause =! gamePause;
         switch (gamePause) {
             case true:
