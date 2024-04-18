@@ -2,7 +2,7 @@ import { getAsset } from "../config/config";
 import { GameInterface } from "../interfaces/GameInterface";
 
 export class PlayerObject extends GameInterface {
-    constructor(velocity, x, y) {
+    constructor(velocity, x, y, bulletSpeed=180) {
         super();
         
         this.player;
@@ -12,6 +12,7 @@ export class PlayerObject extends GameInterface {
         this.playerY = y;
         this.velocity = velocity;
         
+        this.bulletSpeed = bulletSpeed;
         this.bulletsPlayer = 3;
         this.bulletsControl = [];
         this.isShooting = false;
@@ -54,10 +55,6 @@ export class PlayerObject extends GameInterface {
             repeat: -1
         });
         
-        this.player = context.physics.add.sprite(this.playerX, this.playerY, 'player');
-        this.player.play('idle');
-        this.player.setCollideWorldBounds(true);
-
         this.bullets = context.physics.add.group();
 
         for (var count = 0; count < this.bulletsPlayer; count++) {
@@ -68,11 +65,21 @@ export class PlayerObject extends GameInterface {
                 use: false
             });
         };
-        console.log(this.bulletsControl);
+
+        this.player = context.physics.add.sprite(this.playerX, this.playerY, 'player');
+        this.player.play('idle');
+        this.player.setCollideWorldBounds(true);
         
         this.cursor = context.input.keyboard.createCursorKeys();
     };
     update(context, time, delay) {
+        for (var index = 0; index < this.bulletsPlayer; index++) {
+            const bullet = this.bulletsControl[index];
+            if (bullet.bullet.y <= 0) {
+                this.resetBullets(bullet);
+            };
+        };
+
         if (this.cursor.left.isDown) {
             this.player.setVelocityX(-this.velocity);
         }else if (this.cursor.right.isDown) {
@@ -91,14 +98,6 @@ export class PlayerObject extends GameInterface {
 
         if (this.cursor.space.isDown && !this.isShooting) {
             this.isShooting = true;
-
-            for (var count = 0; count < this.bulletsControl; count++) {
-                if (bullet.use === true) {
-                    console.log(this);
-                    this.resetBullet(bullet);
-                };
-            };
-
             const bullet = this.canShoot();
             //console.log(bullet);
             if (bullet != false) {
@@ -115,15 +114,20 @@ export class PlayerObject extends GameInterface {
         bullet.bullet.y = y;
         
         bullet.bullet.visible = true;
-        bullet.bullet.setVelocityY(-80);
+        bullet.bullet.setVelocityY(-this.bulletSpeed);
     };
-    resetBullet(bullet) {
-        bullet.use = false;
-        bullet.bullet.setVelocityY(0);
-        bullet.bullet.visible = false;
+    resetBullets(bullet) {
+        if (bullet.use) {
+            bullet.use = false;
+            bullet.bullet.setVelocityY(0);
+            bullet.bullet.visible = false;
+                    
+            bullet.bullet.x = 0;
+            bullet.bullet.y = 0; 
+            return true;
+        };
+        return false;
         
-        bullet.bullet.x = 0;
-        bullet.bullet.y = 0;
     };
     canShoot() {
         for (var count = 0; count < this.bulletsPlayer; count++) {
